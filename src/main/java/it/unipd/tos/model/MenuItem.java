@@ -4,7 +4,7 @@
 package it.unipd.tos.model;
 
 public class MenuItem {
-    public enum itemType {Banana_Split, Coppa_Nafta, Biancaneve, Pinguino};
+    public enum itemType {Gelato, Budino, Bevanda};
     private String name;
     private double price;
     private itemType itemType;

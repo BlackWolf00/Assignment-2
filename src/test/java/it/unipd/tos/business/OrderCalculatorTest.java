@@ -1,16 +1,18 @@
 package it.unipd.tos.business;
 
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
 import it.unipd.tos.business.exception.TakeAwayBillException;
 import it.unipd.tos.model.MenuItem;
 import it.unipd.tos.model.User;
-
-import static org.junit.Assert.assertEquals;
 
 public class OrderCalculatorTest {
 
@@ -61,5 +63,17 @@ public class OrderCalculatorTest {
         itemsOrdered.add(new MenuItem("Coca Cola", 2.0D ,MenuItem.itemType.Bevanda));
         double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", Date.valueOf("1996-12-23")));
         assertEquals(46.8, total, 0.0);
+    }
+    
+    /*Test for oversized order*/
+    
+    @Test(expected = TakeAwayBillException.class)
+    public void piuDi30Elementi() throws TakeAwayBillException
+    {
+        MenuItem item = new MenuItem("Banana Split", 10.0D, MenuItem.itemType.Gelato);
+        Stream<MenuItem> gelati = Stream.generate(() -> item);
+        List<MenuItem> items = gelati.limit(31).collect(Collectors.toList());
+
+        double result = calculator.getOrderPrice(items, new User("Luca", "Ambrato", Date.valueOf("1996-12-23")));
     }
 } 

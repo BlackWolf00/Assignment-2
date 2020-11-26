@@ -14,6 +14,10 @@ public class OrderCalculator implements TakeAwayBill {
 
     @Override
     public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException {
+        if (itemsOrdered.size() > 30) {
+            throw new TakeAwayBillException(
+                    "Superato il limite di 30 elementi per ordine");
+        }
         double total = 0.0;
         int count = 0;
         double cheaperIceCream = 0.0;

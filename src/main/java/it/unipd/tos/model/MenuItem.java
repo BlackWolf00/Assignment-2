@@ -14,15 +14,15 @@ public class MenuItem {
         this.price = price;
         this.itemType = itemType;
     }
-    public String GetName() {
+    public String getName() {
         return name;
     }
 
-    public double GetPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public itemType GetItemType() {
+    public itemType getItemType() {
         return itemType;
     }
 }

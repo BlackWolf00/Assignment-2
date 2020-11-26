@@ -20,9 +20,7 @@
     <module name="LineLength">
         <property name="max" value="120"/>
     </module>
-    <module name="FileTabCharacter">
-        <property name="eachLine" value="true"/>
-    </module>
+    <module name="FileTabCharacter"/>
     <module name="Header">
         <property name="header"
         value="////////////////////////////////////////////////////////////////////\n// [Matteo] [Tossuto] [1193493]\n////////////////////////////////////////////////////////////////////"/>

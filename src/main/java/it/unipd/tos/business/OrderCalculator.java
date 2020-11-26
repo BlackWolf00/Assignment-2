@@ -30,6 +30,9 @@ public class OrderCalculator implements TakeAwayBill {
         if (count > 5) {
             total -= cheaperIceCream / 2.0;
         }
+        if (total > 50) {
+            total = total * 90.0 / 100.0;
+        }
         return total;
     }
 }

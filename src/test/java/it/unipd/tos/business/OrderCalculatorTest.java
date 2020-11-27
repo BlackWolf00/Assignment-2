@@ -68,12 +68,22 @@ public class OrderCalculatorTest {
     /*Test for oversized order*/
     
     @Test(expected = TakeAwayBillException.class)
-    public void piuDi30Elementi() throws TakeAwayBillException
+    public void overSizedOrder_Test() throws TakeAwayBillException
     {
         MenuItem item = new MenuItem("Banana Split", 10.0D, MenuItem.itemType.Gelato);
         Stream<MenuItem> gelati = Stream.generate(() -> item);
         List<MenuItem> items = gelati.limit(31).collect(Collectors.toList());
 
         double result = calculator.getOrderPrice(items, new User("Luca", "Ambrato", Date.valueOf("1996-12-23")));
+    }
+    
+    /*Test for order with commission of 0.50€*/
+    
+    @Test
+    public void orderWithCommission_Test() throws TakeAwayBillException{
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+        itemsOrdered.add(new MenuItem("Biancaneve", 6.0D, MenuItem.itemType.Bevanda));
+        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", Date.valueOf("1996-12-23")));
+        assertEquals(6.5, total,0.0);
     }
 } 

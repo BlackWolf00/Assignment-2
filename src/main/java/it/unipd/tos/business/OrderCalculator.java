@@ -22,6 +22,7 @@ public class OrderCalculator implements TakeAwayBill {
         }
         double total = 0.0;
         int count = 0;
+        int free = 0;
         double cheaperIceCream = 0.0;
         for (MenuItem item : itemsOrdered) {
             total += item.getPrice();
@@ -43,8 +44,9 @@ public class OrderCalculator implements TakeAwayBill {
             total = total * 90.0 / 100.0;
         }
 
-        if (ChronoUnit.YEARS.between(user.getDob(), LocalDate.now()) < 18 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) <= 1 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) >= 0 && Math.random() < 0.5D) {
+        if (ChronoUnit.YEARS.between(user.getDob(), LocalDate.now()) < 18 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) <= 1 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) >= 0 && Math.random() < 0.5D && free<10) {
             total = 0;
+            free++;
         }
         return total;
     }

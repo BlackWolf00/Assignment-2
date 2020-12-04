@@ -1,4 +1,7 @@
+dist: trusty
+group: edge
 language: java
+sudo: required
 jdk: 
   - openjdk8
 cache:

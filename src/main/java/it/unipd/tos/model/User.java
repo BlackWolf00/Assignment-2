@@ -4,14 +4,14 @@
 
 package it.unipd.tos.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User {
 
     private final String name, surname;
-    private final Date dob;
+    private final LocalDate dob;
 
-    public User(String name, String surname, Date dob) {
+    public User(String name, String surname, LocalDate dob) {
         
         this.name = name;
         this.surname = surname;
@@ -26,7 +26,7 @@ public class User {
         return name;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 }

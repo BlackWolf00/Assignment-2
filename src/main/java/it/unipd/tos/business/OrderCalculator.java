@@ -4,6 +4,9 @@
 
 package it.unipd.tos.business;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import it.unipd.tos.business.exception.TakeAwayBillException;
@@ -13,7 +16,7 @@ import it.unipd.tos.model.User;
 public class OrderCalculator implements TakeAwayBill {
 
     @Override
-    public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException {
+    public double getOrderPrice(List<MenuItem> itemsOrdered, User user, LocalTime time) throws TakeAwayBillException {
         if (itemsOrdered.size() > 30) {
             throw new TakeAwayBillException("Superato il limite di 30 elementi per ordine");
         }
@@ -38,6 +41,10 @@ public class OrderCalculator implements TakeAwayBill {
         }
         if (total > 50) {
             total = total * 90.0 / 100.0;
+        }
+
+        if (ChronoUnit.YEARS.between(user.getDob(), LocalDate.now()) < 18 && Math.random() < 0.5D) {
+            total = 0;
         }
         return total;
     }

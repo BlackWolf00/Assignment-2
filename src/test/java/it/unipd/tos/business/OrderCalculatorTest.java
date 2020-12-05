@@ -30,12 +30,11 @@ public class OrderCalculatorTest {
         itemsOrdered.add(new MenuItem("Pinguino", 8.0D, MenuItem.itemType.Budino));
         itemsOrdered.add(new MenuItem("The al limone", 2.0D, MenuItem.itemType.Bevanda));
 
-        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)),
-                LocalTime.of(16, 30));
+        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)));
         assertEquals(16.0D, total, 0.0D);
     }
 
-    /* Test for order with more five Ice Cream */
+    /* Test for order with more five Ice Cream and discount the cheaper ice-cream*/
 
     @Test
     public void moreThanFiveIceCream_Test() throws TakeAwayBillException {
@@ -46,8 +45,7 @@ public class OrderCalculatorTest {
         itemsOrdered.add(new MenuItem("Banana Split", 10.0D, MenuItem.itemType.Gelato));
         itemsOrdered.add(new MenuItem("Banana Split", 10.0D, MenuItem.itemType.Gelato));
         itemsOrdered.add(new MenuItem("Banana Split", 10.0D, MenuItem.itemType.Gelato));
-        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)),
-                LocalTime.of(13, 10));
+        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)));
         assertEquals(45, total, 0.0);
     }
 
@@ -65,8 +63,7 @@ public class OrderCalculatorTest {
         itemsOrdered.add(new MenuItem("Coca Cola", 2.0D, MenuItem.itemType.Bevanda));
         itemsOrdered.add(new MenuItem("Coca Cola", 2.0D, MenuItem.itemType.Bevanda));
         itemsOrdered.add(new MenuItem("Coca Cola", 2.0D, MenuItem.itemType.Bevanda));
-        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)),
-                LocalTime.of(15, 10));
+        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)));
         assertEquals(46.8, total, 0.0);
     }
 
@@ -78,8 +75,7 @@ public class OrderCalculatorTest {
         Stream<MenuItem> gelati = Stream.generate(() -> item);
         List<MenuItem> items = gelati.limit(31).collect(Collectors.toList());
 
-        double total = calculator.getOrderPrice(items, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)),
-                LocalTime.of(17, 20));
+        double total = calculator.getOrderPrice(items, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)));
     }
 
     /* Test for order with commission of 0.50€ */
@@ -88,8 +84,7 @@ public class OrderCalculatorTest {
     public void orderWithCommission_Test() throws TakeAwayBillException {
         List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
         itemsOrdered.add(new MenuItem("Biancaneve", 6.0D, MenuItem.itemType.Budino));
-        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)),
-                LocalTime.of(18, 42));
+        double total = calculator.getOrderPrice(itemsOrdered, new User("Luca", "Ambrato", LocalDate.of(1996, 12, 23), LocalTime.of(15, 30)));
         assertEquals(6.5, total, 0.0);
     }
 
@@ -128,7 +123,7 @@ public class OrderCalculatorTest {
 
         int freeOrder = 0;
         for (User user : utenti) {
-            double total = calculator.getOrderPrice(itemsOrdered, user, LocalTime.of(18, 0, 0));
+            double total = calculator.getOrderPrice(itemsOrdered, user);
             if (ChronoUnit.YEARS.between(user.getDob(), LocalDate.now()) < 18 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) <= 1 && ChronoUnit.HOURS.between(LocalTime.of(19, 0), user.getDl()) >= 0 && Math.random() < 0.5D && freeOrder < 10)
                 freeOrder++;
             assertTrue(total == 6.5D || total == 0);

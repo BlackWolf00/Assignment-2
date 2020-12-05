@@ -16,7 +16,7 @@ import it.unipd.tos.model.User;
 public class OrderCalculator implements TakeAwayBill {
 
     @Override
-    public double getOrderPrice(List<MenuItem> itemsOrdered, User user, LocalTime time) throws TakeAwayBillException {
+    public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException {
         if (itemsOrdered.size() > 30) {
             throw new TakeAwayBillException("Superato il limite di 30 elementi per ordine");
         }
